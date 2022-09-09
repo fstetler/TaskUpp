@@ -11,13 +11,13 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String description;
-    private String fieldStatus;
+    private String status;
 
     protected Task() {};
 
     public Task(String description, String fieldStatus) {
         this.description = description;
-        this.fieldStatus = fieldStatus;
+        this.status = fieldStatus;
     }
 
     public Long getId() {
@@ -28,6 +28,5 @@ public class Task {
         return description;
     }
 
-    // Add here a getter for fieldstatus
-    public String getFieldStatus() { return fieldStatus; }
+    public String getStatus() { return status; }
 }

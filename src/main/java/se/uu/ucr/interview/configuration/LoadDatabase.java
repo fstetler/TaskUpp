@@ -1,13 +1,12 @@
 package se.uu.ucr.interview.configuration;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import se.uu.ucr.interview.jpa.Task;
 import se.uu.ucr.interview.jpa.TaskRepository;
-
-import org.slf4j.Logger;
 
 @Configuration
 public class LoadDatabase {

@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import se.uu.ucr.interview.jpa.Task;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TaskControllerTest {
@@ -16,25 +16,33 @@ class TaskControllerTest {
     TestRestTemplate testRestTemplate;
 
     @Test
-    public void listTasks_shouldReturnTasks() throws Exception {
+    public void listTasks_shouldReturnTasks() {
         ResponseEntity<String> entity = testRestTemplate.getForEntity("/tasks", String.class);
         Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Assertions.assertThat(entity.getBody()).contains("Read through code", "Completed");
         Assertions.assertThat(entity.getBody()).contains("Perform tasks", "Completed");
+        Assertions.assertThat(entity.getBody()).contains("Present solution", "Open");
     }
 
     @Test
-    public void getTask_shouldReturnTask() throws Exception {
+    public void getTask_shouldReturnTask() {
         ResponseEntity<String> entity = testRestTemplate.getForEntity("/tasks/1", String.class);
         Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(entity.getBody()).contains("Read through code", "Completed");
     }
 
     @Test
-    public void getNonExistingTask_shouldReturnError() throws Exception {
+    public void getNonExistingTask_shouldReturnError() {
         ResponseEntity<String> entity = testRestTemplate.getForEntity("/tasks/5", String.class);
-        Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-//        Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
 
-    // Here i would add a test which tests the 4th task and verifies that its first not there, and then add a task and verify that there now is a 4th task
+    @Test
+    public void addTask_verifyNewTaskIsAdded() {
+        ResponseEntity<String> entityBefore = testRestTemplate.getForEntity("/tasks/4", String.class);
+        Assertions.assertThat(entityBefore.getStatusCode()).isEqualTo(HttpStatus.OK);
+        testRestTemplate.postForEntity("/tasks", new Task("Finishing task", "Open"), String.class);
+        ResponseEntity<String> entityAfter = testRestTemplate.getForEntity("/tasks/4", String.class);
+        Assertions.assertThat(entityAfter.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }
