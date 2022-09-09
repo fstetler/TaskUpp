@@ -16,7 +16,7 @@ class TaskControllerTest {
     TestRestTemplate testRestTemplate;
 
     @Test
-    public void listTasks_shouldReturnTasks() {
+    public void listTasks_verifyRepoContainsTasks() {
         ResponseEntity<String> entity = testRestTemplate.getForEntity("/tasks", String.class);
         Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(entity.getBody()).contains("Read through code", "Completed");
@@ -25,14 +25,14 @@ class TaskControllerTest {
     }
 
     @Test
-    public void getTask_shouldReturnTask() {
+    public void getTask_verifyTaskById() {
         ResponseEntity<String> entity = testRestTemplate.getForEntity("/tasks/1", String.class);
         Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(entity.getBody()).contains("Read through code", "Completed");
     }
 
     @Test
-    public void getNonExistingTask_shouldReturnError() {
+    public void getNonExistingTask_verifyTaskIsNotFound() {
         ResponseEntity<String> entity = testRestTemplate.getForEntity("/tasks/5", String.class);
         Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }

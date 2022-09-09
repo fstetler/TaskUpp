@@ -6,3 +6,4 @@
 // Removed unneeded throwing of exception warning
 // Changed NotFoundException to ResponseStatusException to better represent what is actually happening
 // Added server error message in application.properties in order for ResponseStatusException to show error message
+// CHanged some test names to better reflect what is happening (no return so why call it return)
