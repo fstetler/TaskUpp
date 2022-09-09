@@ -1,0 +1,8 @@
+// notes to assignment ----
+// Add autowired in order to instantiate repository
+// Added RequestMapping("/tasks") so all mapping uses it instead of just GetMapping, saves space for PostMapping
+// Changed GetMappingPath with id so not to call /tasks/ twice
+// Changed name from getTasks to getTaskById for easier readability/logical
+// Removed unneeded throwing of exception warning
+// Changed NotFoundException to ResponseStatusException to better represent what is actually happening
+// Added server error message in application.properties in order for ResponseStatusException to show error message
