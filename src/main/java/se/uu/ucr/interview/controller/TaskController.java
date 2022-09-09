@@ -1,9 +1,8 @@
 package se.uu.ucr.interview.controller;
 
 import javassist.NotFoundException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import se.uu.ucr.interview.jpa.Task;
 import se.uu.ucr.interview.jpa.TaskRepository;
 
@@ -17,6 +16,8 @@ public class TaskController {
 
     private final TaskRepository taskRepository;
 
+    // Add @Autowired here
+    @Autowired
     TaskController(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }

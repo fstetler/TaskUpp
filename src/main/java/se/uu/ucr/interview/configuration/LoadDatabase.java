@@ -16,9 +16,9 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner init(TaskRepository taskRepository) {
         return args -> {
-            log.info("Load... " + taskRepository.save(new Task("Read through code")));
-            log.info("Load... " + taskRepository.save(new Task("Perform tasks")));
-            log.info("Load... " + taskRepository.save(new Task("Present solution")));
+            log.info("Load... " + taskRepository.save(new Task("Read through code", "Completed")));
+            log.info("Load... " + taskRepository.save(new Task("Perform tasks", "Completed")));
+            log.info("Load... " + taskRepository.save(new Task("Present solution", "Open")));
         };
     }
 }
