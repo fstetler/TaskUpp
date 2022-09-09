@@ -31,7 +31,12 @@ public class TaskController {
 
     @GetMapping("/tasks/{id}")
     public Task getTask(@PathVariable Long id) throws NotFoundException {
-        return taskRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(MessageFormat.format("Task with id {0} was not found.", id)));
+        return taskRepository.findById(id).orElse(null);
+//        return taskRepository.findById(id)
+//                .orElseThrow(() -> new NotFoundException(MessageFormat.format("Task with id {0} was not found.", id)));
+    }
+
+    @PostMapping
+    public void addTask(Task task) {
     }
 }
