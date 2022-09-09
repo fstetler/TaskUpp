@@ -39,10 +39,10 @@ class TaskControllerTest {
 
     @Test
     public void addTask_verifyNewTaskIsAdded() {
-        ResponseEntity<String> entityBefore = testRestTemplate.getForEntity("/tasks/4", String.class);
-        Assertions.assertThat(entityBefore.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        ResponseEntity<String> entity = testRestTemplate.getForEntity("/tasks/4", String.class);
+        Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         testRestTemplate.postForEntity("/tasks", new Task("Finishing task", "Open"), String.class);
-        ResponseEntity<String> entityAfter = testRestTemplate.getForEntity("/tasks/4", String.class);
-        Assertions.assertThat(entityAfter.getStatusCode()).isEqualTo(HttpStatus.OK);
+        entity = testRestTemplate.getForEntity("/tasks/4", String.class);
+        Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }
